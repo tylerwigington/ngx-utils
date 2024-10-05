@@ -11,7 +11,7 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "paths": {
-      "ngx-route-guard-utils": ["./dist/ngx-route-guard-utils"]
+      "ngx-serial-route-guards": ["./dist/ngx-serial-route-guards"]
     },
     "sourceMap": true,
     "declaration": false,

@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-route-guard-utils": {
+    "ngx-serial-route-guards": {
       "projectType": "library",
-      "root": "projects/ngx-route-guard-utils",
-      "sourceRoot": "projects/ngx-route-guard-utils/src",
+      "root": "projects/ngx-serial-route-guards",
+      "sourceRoot": "projects/ngx-serial-route-guards/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-route-guard-utils/ng-package.json"
+            "project": "projects/ngx-serial-route-guards/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-route-guard-utils/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-serial-route-guards/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-route-guard-utils/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-serial-route-guards/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/ngx-route-guard-utils/tsconfig.spec.json",
+            "tsConfig": "projects/ngx-serial-route-guards/tsconfig.spec.json",
             "polyfills": ["zone.js", "zone.js/testing"],
             "codeCoverage": true,
             "browsers": "ChromeHeadless",

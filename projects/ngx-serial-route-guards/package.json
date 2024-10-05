@@ -1,12 +1,21 @@
 {
-  "name": "ngx-route-guard-utils",
+  "name": "ngx-serial-route-guards",
   "version": "1.0.0",
   "description": "Collection of utility functions for executing functional Angular Route Guards serially.",
   "author": "Tyler Wigington",
   "repository": {
     "type": "git",
-    "url": "https://github."
+    "url": "https://github.com/tylerwigington/ngx-utils.git",
+    "directory": "projects/ngx-serial-route-guards"
   },
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "route",
+    "guards",
+    "route guards"
+  ],
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0"

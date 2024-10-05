@@ -2,7 +2,7 @@ import {
   canActivateSerially,
   canDeactivateSerially,
   canMatchSerially,
-} from './ngx-route-guard-utils';
+} from './ngx-serial-route-guards';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockGuardFactory } from './testing/mock-guard-factory.service';
 import {
