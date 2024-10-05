@@ -1,6 +1,6 @@
 {
   "name": "ngx-serial-route-guards",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Collection of utility functions for executing functional Angular Route Guards serially.",
   "author": "Tyler Wigington",
   "repository": {

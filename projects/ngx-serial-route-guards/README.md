@@ -1,24 +1,32 @@
 # NgxSerialRouteGuards
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Collection of utilities for executing functional route guards serially.
 
-## Code scaffolding
+## Examples
 
-Run `ng generate component component-name --project ngx-serial-route-guards` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-serial-route-guards`.
-> Note: Don't forget to add `--project ngx-serial-route-guards` or else it will be added to the default project in your `angular.json` file. 
+```typescript
+// guards
+export const authGuard: CanActivateFn = () => {
+  const router = inject(Router);
+  const authService = inject(AuthService);
+  return authService.isAuthenticated() || router.createUrlTree(['/auth/login']);
+};
 
-## Build
+export const adminGuard: CanActivateFn = () => {
+  const router = inject(Router);
+  const userService = inject(UserService);
+  return userService.user?.isAdmin || router.createUrlTree(['
+  /unauthorized']);
+};
 
-Run `ng build ngx-serial-route-guards` to build the project. The build artifacts will be stored in the `dist/` directory.
+...
 
-## Publishing
-
-After building your library with `ng build ngx-serial-route-guards`, go to the dist folder `cd dist/ngx-serial-route-guards` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-serial-route-guards` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+// routes
+const routes: Routes = [
+  {
+    path: '/admin',
+    loadComponent: () => import('./admin/admin.page').then(m => m.AdminPage),
+    canActivate: [runSerially([authGuard, adminGuard])]
+  }
+]
+```
