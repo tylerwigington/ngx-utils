@@ -17,8 +17,8 @@
     "route guards"
   ],
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": "^18.2.7",
+    "@angular/core": "^18.2.7"
   },
   "dependencies": {
     "tslib": "^2.3.0"
