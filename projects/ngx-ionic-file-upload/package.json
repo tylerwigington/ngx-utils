@@ -1,0 +1,13 @@
+{
+  "name": "ngx-ionic-file-upload",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/common": "^19.2.7",
+    "@angular/core": "^19.2.7",
+    "@ionic/angular": "^8.4.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

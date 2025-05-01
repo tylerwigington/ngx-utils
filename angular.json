@@ -35,6 +35,39 @@
           }
         }
       }
+    },
+    "ngx-ionic-file-upload": {
+      "projectType": "library",
+      "root": "projects/ngx-ionic-file-upload",
+      "sourceRoot": "projects/ngx-ionic-file-upload/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-ionic-file-upload/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-ionic-file-upload/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-ionic-file-upload/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-ionic-file-upload/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "codeCoverage": true,
+            "browsers": "ChromeHeadless",
+            "watch": false
+          }
+        }
+      }
     }
   }
 }

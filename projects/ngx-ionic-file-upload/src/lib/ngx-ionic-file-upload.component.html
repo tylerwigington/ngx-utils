@@ -1,0 +1,51 @@
+<div>
+  <div
+    #dropContainer
+    id="drop-area"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event)"
+  >
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-icon id="uploadIcon" size="large" [name]="uploadLabelIcon">
+        </ion-icon>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-text id="uploadLabelText">
+          {{ uploadLabelText }}
+        </ion-text>
+      </ion-row>
+      @if(uploadHelpText){
+      <ion-row class="ion-justify-content-center">
+        <ion-note id="uploadHelpText">{{ uploadHelpText }}</ion-note>
+      </ion-row>
+      }
+    </ion-grid>
+  </div>
+  @if(files.length){
+  <ion-list lines="full">
+    @for(file of files; track file.name; let i = $index){
+    <ion-item>
+      <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
+      <ion-label>
+        <span style="display: block">
+          {{ file.name }}
+        </span>
+        <ion-note>{{ file.size | fileSize }}</ion-note>
+      </ion-label>
+      <ion-button slot="end" color="danger" (click)="removeFile(i)">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+    }
+  </ion-list>
+  }
+  <input
+    #fileInput
+    type="file"
+    (change)="fileChange($any($event))"
+    [accept]="accepts.join(',')"
+    [multiple]="multiple"
+    hidden
+  />
+</div>
