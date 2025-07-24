@@ -24,38 +24,38 @@ describe('NgxIonicFileUploadComponent', () => {
     dropContainerEventListenerSpy = spyOn(
       component.dropContainer.nativeElement,
       'addEventListener'
-    ).and.callThrough();
+    );
     hiddenInputSpy = spyOnAllFunctions(component.fileInput.nativeElement);
   });
   it('should create', () => {
     expect(component).toBeTruthy();
   });
   it('default accepts field should be empty array for accepts all', () => {
-    expect(component.accepts.length).toBe(0);
+    expect(component.config.accepts?.length).toBe(0);
   });
   it('default allow field should be false', () => {
-    expect(component.multiple).toBe(false);
+    expect(component.config.multiple).toBe(false);
   });
   it('default allowDirectories field should be false', () => {
-    expect(component.allowDirectories).toBe(false);
+    expect(component.config.allowDirectories).toBe(false);
   });
   it('default maxFileSize field should be undefined', () => {
-    expect(component.maxFileSize).toBe(undefined);
+    expect(component.config.maxFileSize).toBe(undefined);
   });
   it('default uploadIcon field should be cloud-outline', () => {
-    expect(component.uploadLabelIcon).toBe('cloud-upload');
+    expect(component.config.uploadIcon).toBe('cloud-upload');
   });
   it(
-    "default uploadLabelText field should be '" + defaultLabelText + "'",
+    "default containerMainLabelText field should be '" + defaultLabelText + "'",
     () => {
-      expect(component.uploadLabelText).toBe(defaultLabelText);
+      expect(component.config.containerMainLabelText).toBe(defaultLabelText);
     }
   );
-  it('default uploadHelperText field should be empty', () => {
-    expect(component.uploadHelpText).toBeFalsy();
+  it('default containerHelpLabelText field should be empty', () => {
+    expect(component.config.containerHelpLabelText).toBeFalsy();
   });
   it('default fileChanged handler field should be defined', () => {
-    expect(component.fileChanged).toBeInstanceOf(EventEmitter);
+    expect(component.filesChanged).toBeInstanceOf(EventEmitter);
   });
   it('should add event handler for drop container click', () => {
     expect(dropContainerEventListenerSpy).toHaveBeenCalled();

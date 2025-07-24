@@ -1,29 +1,25 @@
 <div>
-  <div
-    #dropContainer
-    id="drop-area"
-    (dragover)="onDragOver($event)"
-    (drop)="onDrop($event)"
-  >
+  <div #dropContainer id="drop-area" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
-        <ion-icon id="uploadIcon" size="large" [name]="uploadLabelIcon">
-        </ion-icon>
+        <ion-icon id="uploadIcon" size="large" [name]="config.uploadIcon"> </ion-icon>
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-text id="uploadLabelText">
-          {{ uploadLabelText }}
+          {{ config.containerMainLabelText }}
         </ion-text>
       </ion-row>
-      @if(uploadHelpText){
+      @if(config.containerHelpLabelText){
       <ion-row class="ion-justify-content-center">
-        <ion-note id="uploadHelpText">{{ uploadHelpText }}</ion-note>
+        <ion-note id="uploadHelpText">
+          {{ config.containerHelpLabelText }}
+        </ion-note>
       </ion-row>
       }
     </ion-grid>
   </div>
   @if(files.length){
-  <ion-list lines="full">
+  <ion-list lines="full" class="ion-no-padding">
     @for(file of files; track file.name; let i = $index){
     <ion-item>
       <ion-icon color="success" slot="start" name="checkmark-circle"></ion-icon>
@@ -33,9 +29,11 @@
         </span>
         <ion-note>{{ file.size | fileSize }}</ion-note>
       </ion-label>
-      <ion-button slot="end" color="danger" (click)="removeFile(i)">
-        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-      </ion-button>
+      <ion-buttons>
+        <ion-button color="danger" (click)="removeFile(i)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
     }
   </ion-list>
@@ -44,8 +42,7 @@
     #fileInput
     type="file"
     (change)="fileChange($any($event))"
-    [accept]="accepts.join(',')"
-    [multiple]="multiple"
-    hidden
-  />
+    [accept]="config.accepts?.join(',')"
+    [multiple]="config.multiple"
+    hidden />
 </div>

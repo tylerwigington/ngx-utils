@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ngx Ionic File Upload Demo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onThemeChange()">
+        <ion-icon slot="icon-only" [name]="darkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-padding-vertical">
+    <ion-row class="ion-justify-content-center">
+      <ion-col sizeMd="3" sizeSm="12">
+        <ngx-ionic-file-upload
+          [config]="{ multiple: true, accepts: ['application/pdf', 'image/*'] }"
+          (filesChanged)="onFileChange($event)"></ngx-ionic-file-upload>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
