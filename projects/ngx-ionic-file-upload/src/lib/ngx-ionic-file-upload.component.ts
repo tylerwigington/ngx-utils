@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  input,
+  Input,
+  OnInit,
+  output,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   IonButton,
   IonButtons,
@@ -27,6 +38,7 @@ const defaultConfig: NgxIonicFileUploadConfig = {
   uploadIcon: 'cloud-upload',
   containerMainLabelText: 'Drag & Drop or click here to select file(s)',
   containerHelpLabelText: '',
+  showFileList: true,
 };
 
 @Component({
@@ -55,16 +67,13 @@ export class NgxIonicFileUploadComponent implements AfterViewInit, OnInit {
   @ViewChild('fileInput')
   public fileInput!: ElementRef<HTMLInputElement>;
 
-  @Input() public set config(configOpts: NgxIonicFileUploadConfig) {
-    this._config = { ...defaultConfig, ...configOpts };
-  }
-  public get config() {
-    return this._config;
-  }
+  public config = input(defaultConfig, {
+    transform: (cfg: NgxIonicFileUploadConfig) => ({ ...defaultConfig, ...cfg }),
+  });
 
-  @Output() filesChanged = new EventEmitter<File[]>();
+  public filesChanged = output<File[]>();
 
-  public files: File[] = [];
+  protected files: File[] = [];
 
   constructor() {
     addIcons({ cloudUpload, checkmarkCircle, trashOutline });
@@ -86,39 +95,40 @@ export class NgxIonicFileUploadComponent implements AfterViewInit, OnInit {
     this.filesChanged.emit(this.files);
   }
 
-  public onDragOver(event: DragEvent) {
-    preventDefaults(event);
-    this.dropContainer.nativeElement.classList.add('highlight');
-  }
-
-  public onDrop(event: DragEvent) {
-    preventDefaults(event);
-    this.files = this.applyRules(Array.from(event.dataTransfer?.files || []));
-    this.dropContainer.nativeElement.classList.remove('highlight');
-    this.filesChanged.emit(this.files);
-  }
-
   private addHandlers() {
     this.dropContainer.nativeElement.addEventListener('click', event => {
       preventDefaults(event);
       this.fileInput.nativeElement.click();
     });
-    this.dropContainer.nativeElement.addEventListener('dragenter', preventDefaults);
-    this.dropContainer.nativeElement.addEventListener('dragleave', preventDefaults);
+    this.dropContainer.nativeElement.addEventListener('dragover', preventDefaults);
+    this.dropContainer.nativeElement.addEventListener('drop', event => {
+      preventDefaults(event);
+      this.files = this.applyRules(Array.from(event.dataTransfer?.files || []));
+      this.dropContainer.nativeElement.classList.remove('highlight');
+      this.filesChanged.emit(this.files);
+    });
+    this.dropContainer.nativeElement.addEventListener('dragenter', event => {
+      preventDefaults(event);
+      this.dropContainer.nativeElement.classList.add('highlight');
+    });
+    this.dropContainer.nativeElement.addEventListener('dragleave', event => {
+      preventDefaults(event);
+      this.dropContainer.nativeElement.classList.remove('highlight');
+    });
   }
 
   private applyRules(files: File[]) {
-    if (!files || !files.length) [];
+    if (!files || !files.length) return [];
 
     let filtered = [...files];
-    if (!this.config.multiple) {
+    if (!this.config().multiple) {
       filtered = [files[0]];
     }
-    if (this.config.accepts?.length) {
-      filtered = files.filter(f => this.config.accepts?.indexOf(f.type) !== -1);
+    if (this.config().accepts?.length) {
+      filtered = files.filter(f => this.config().accepts?.indexOf(f.type) !== -1);
     }
-    if (!!this.config.maxFileSize) {
-      filtered = files.filter(f => f.size <= this.config.maxFileSize!);
+    if (!!this.config().maxFileSize) {
+      filtered = files.filter(f => f.size <= this.config().maxFileSize!);
     }
     return files;
   }
@@ -136,4 +146,5 @@ export interface NgxIonicFileUploadConfig {
   uploadIcon?: string;
   containerMainLabelText?: string;
   containerHelpLabelText?: string;
+  showFileList?: boolean;
 }

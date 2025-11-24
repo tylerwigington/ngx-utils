@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, DOCUMENT } from '@angular/core';
 import {
   IonButton,
   IonButtons,
@@ -11,6 +10,7 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
+  IonCheckbox,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { moonOutline, sunnyOutline } from 'ionicons/icons';
@@ -32,6 +32,7 @@ import { NgxIonicFileUploadComponent } from '../../../ngx-ionic-file-upload/src/
     IonRow,
     IonCol,
     NgxIonicFileUploadComponent,
+    IonCheckbox,
   ],
 })
 export class AppComponent {

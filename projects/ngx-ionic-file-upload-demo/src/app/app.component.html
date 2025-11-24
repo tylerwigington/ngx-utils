@@ -12,10 +12,15 @@
 <ion-content>
   <ion-grid class="ion-padding-vertical">
     <ion-row class="ion-justify-content-center">
-      <ion-col sizeMd="3" sizeSm="12">
+      <ion-col sizeLg="4" sizeMd="6" sizeSm="10" size="12">
         <ngx-ionic-file-upload
           [config]="{ multiple: true, accepts: ['application/pdf', 'image/*'] }"
           (filesChanged)="onFileChange($event)"></ngx-ionic-file-upload>
+      </ion-col>
+      <ion-col sizeLg="4" sizeMd="6" sizeSm="10" size="12">
+        <ion-checkbox labelPlacement="end">
+          <span slot="label">Multiple?</span>
+        </ion-checkbox>
       </ion-col>
     </ion-row>
   </ion-grid>
